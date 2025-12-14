@@ -112,7 +112,8 @@ function startAutoSlide() {
 
 function initTestimonials() {
     const indicators = document.getElementById('testimonial-indicators');
-    if (!indicators) return;
+    const card = document.querySelector('.testimonial-card');
+    if (!indicators || !card) return;
     
     testimonialsData.forEach((_, i) => {
         const btn = document.createElement('button');
@@ -120,7 +121,16 @@ function initTestimonials() {
         btn.onclick = () => goToTestimonial(i);
         indicators.appendChild(btn);
     });
+    
+    // Show first testimonial and measure height
     updateTestimonial();
+    
+    // Set fixed height based on first testimonial (longest text)
+    setTimeout(() => {
+        const cardHeight = card.offsetHeight;
+        card.style.height = cardHeight + 'px';
+    }, 100);
+    
     startAutoSlide();
 }
 
