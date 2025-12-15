@@ -23,6 +23,8 @@ ul { list-style: none; }
 .custom-scrollbar::-webkit-scrollbar-track { background: var(--gray-100); border-radius: 3px; }
 .custom-scrollbar::-webkit-scrollbar-thumb { background: var(--brand-300); border-radius: 3px; }
 
+.sr-only{position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap;}
+
 /* Header */
 .header { position: fixed; top: 0; left: 0; right: 0; z-index: 50; background: rgba(255,255,255,0.95); backdrop-filter: blur(8px); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); }
 .header-content { display: flex; justify-content: space-between; align-items: center; height: 64px; }
