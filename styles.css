@@ -335,6 +335,11 @@ ul { list-style: none; }
 .contact-gla-link span { font-weight: 500; color: var(--gray-700); font-size: 1.125rem; }
 
 /* Order Page */
+.order-cta { text-align: center; margin-bottom: 2rem; }
+.preview-section { text-align: center; margin-bottom: 2rem; }
+.preview-section h3 { font-size: 1.75rem; font-weight: 700; color: var(--brand-800); margin-bottom: 1.5rem; }
+.pdf-viewer { max-width: 100%; margin: 0 auto; }
+@media (max-width: 768px) { .pdf-viewer iframe { height: 500px; } }
 .order-online { max-width: 100%; margin: 0 auto 4rem; }
 .order-online-card { background: var(--brand-50); border-radius: 1rem; padding: 2rem; text-align: center; box-shadow: 0 1px 3px rgba(0,0,0,0.1); border: 1px solid var(--brand-100); }
 @media (min-width: 768px) { .order-online-card { padding: 3rem; } }
@@ -349,6 +354,9 @@ ul { list-style: none; }
 .order-section-title .accent { width: 8px; height: 32px; border-radius: 2px; }
 .order-section-title.alpha { color: var(--brand); }
 .order-section-title.alpha .accent { background: var(--brand); }
+.order-section-title.tramdoc { color: #16a34a; }
+.order-section-title.tramdoc .accent { background: #16a34a; }
+.order-tramdoc-card .address svg, .order-tramdoc-card .phone svg { stroke: #16a34a; }
 .order-section-title.fahasa { color: #C92127; }
 .order-section-title.fahasa .accent { background: #C92127; }
 .order-table-wrapper { display: none; overflow: hidden; border-radius: 0.75rem; border: 1px solid var(--gray-200); box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
@@ -378,6 +386,8 @@ ul { list-style: none; }
 .order-fahasa-card h5 { font-weight: 700; color: var(--gray-900); margin-bottom: 0.75rem; }
 .order-fahasa-card .address { display: flex; align-items: flex-start; gap: 0.5rem; font-size: 0.875rem; color: var(--gray-600); }
 .order-fahasa-card .address svg { color: #C92127; flex-shrink: 0; margin-top: 2px; }
+.order-fahasa-card .phone { display: flex; align-items: flex-start; gap: 0.5rem; font-size: 0.875rem; color: var(--gray-600); }
+.order-fahasa-card .phone svg { color: #C92127; flex-shrink: 0; margin-top: 2px; }
 
 /* Testimonials Page */
 .testimonials-page-grid { display: grid; grid-template-columns: 1fr; gap: 2rem; }

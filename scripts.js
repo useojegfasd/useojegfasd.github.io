@@ -16,17 +16,24 @@ const tocData = [
 ];
 
 const alphaBooksLocations = [
-    { id: 1, name: 'Gian Hàng Alpha Books HN', address: 'Đường sách 19/12, Trần Hưng Đạo, Hoàn Kiếm', city: 'Hà Nội', phone: '(02) 432668036' },
-    { id: 2, name: 'Nhà sách Vinh', address: '211 Lê Duẩn, Tp Vinh', city: 'Nghệ An', phone: '(02) 383 555 468' },
-    { id: 3, name: 'Gian Hàng Alpha Books HCM', address: 'Đường sách Nguyễn Văn Bình, Q.1', city: 'HCM', phone: '(08) 38 251 789' },
-    { id: 4, name: 'Alpha Books Online SG', address: '252/18D Phan Anh, Hiệp Tân, Tân Phú', city: 'HCM', phone: '0886319009' },
-    { id: 5, name: 'Alpha Books Online HN', address: '44 P. Ba La, Phú Lương, Hà Đông', city: 'Hà Nội', phone: '0932329959' }
+    { id: 1, name: 'Gian Hàng Alpha Books Hà Nội', address: 'Đường sách 19/12, Trần Hưng Đạo, Hoàn Kiếm', city: 'Hà Nội', phone: '(02) 432668036' },
+    { id: 2, name: 'Nhà sách Vinh', address: '211 Lê Duẩn, TP. Vinh', city: 'Nghệ An', phone: '(02) 383 555 468' },
+    { id: 3, name: 'Gian Hàng Alpha Books TP. Hồ Chí Minh', address: 'Đường sách Nguyễn Văn Bình, Q.1', city: 'HCM', phone: '(08) 38 251 789' },
+    { id: 4, name: 'Alpha Books Online TP. Hồ Chí Minh', address: '252/18D Phan Anh, Hiệp Tân, Tân Phú', city: 'HCM', phone: '0886319009' },
+    { id: 5, name: 'Alpha Books Online Hà Nội', address: '44 P. Ba La, Phú Lương, Hà Đông', city: 'Hà Nội', phone: '0932329959' }
 ];
 
 const fahasaLocations = [
-    { name: 'Nhà sách Fahasa Xã Đàn', address: '338 Xã Đàn – Đống Đa – Hà Nội' },
-    { name: 'Nhà sách Fahasa Hà Đông', address: 'Tầng 3 – Siêu thị Sài Gòn Co.op Mart – Km10 Nguyễn Trãi – Hà Đông – Hà Nội' },
-    { name: 'Nhà sách Fahasa Long Biên', address: 'Tầng 2 TTTM MiPec Số 2, Long Biên II, Ngọc Lâm, Long Biên, Hà Nội' }
+    { name: 'Nhà sách Fahasa Xã Đàn', address: '338 Xã Đàn, Đống Đa, Hà Nội' },
+    { name: 'Nhà sách Fahasa Hà Đông', address: 'Tầng 3, Siêu thị Sài Gòn Co.op Mart, Km10 Nguyễn Trãi, Hà Đông, Hà Nội' },
+    { name: 'Nhà sách Fahasa Long Biên', address: 'Tầng 2, TTTM MiPec Số 2, Long Biên II, Ngọc Lâm, Long Biên, Hà Nội' },
+	{ name: 'Nhà sách Fahasa Đống Đa', address: 'Tầng 2, Siêu thị Lotte Mart, 229 Tây Sơn, Đống Đa, Hà Nội' }
+];
+
+const tramdocLocations = [
+    { name: 'Read Station - Huỳnh Thúc Kháng', address: '155 Huỳnh Thúc Kháng, Phường Láng, Hà Nội', phone: '086 990 26 28' },
+    { name: 'Read Station - Nguyễn Thái Bình', address: '311 Nguyễn Thái Bình, Phường Bảy Hiền, TP. Hồ Chí Minh', phone: '086 990 26 28' },
+    { name: 'Trung tâm trải nghiệm khoa học Einstein House', address: 'Biệt thự số 2, 16A1, Làng Việt Kiều Châu Âu, Mộ Lao, Hà Đông, Hà Nội', phone: '0936.149.090 - 0934.488.080' }
 ];
 
 // State
@@ -233,6 +240,20 @@ function initOrderPage() {
                         <div><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg><span>${loc.address}</span></div>
                         <div><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg><span class="phone">${loc.phone}</span></div>
                     </div>
+                </div>
+            `;
+        });
+    }
+
+    // Tram Doc Grid
+    const tramdocGrid = document.getElementById('tramdoc-grid');
+    if (tramdocGrid) {
+        tramdocLocations.forEach(loc => {
+            tramdocGrid.innerHTML += `
+                <div class="order-fahasa-card order-tramdoc-card">
+                    <h5>${loc.name}</h5>
+                    <div class="address"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg><span>${loc.address}</span></div>
+                    <div class="phone"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg><span>${loc.phone}</span></div>
                 </div>
             `;
         });
