@@ -94,6 +94,7 @@ ul { list-style: none; }
 .btn-lazada { background: #0f146d; }
 .btn-alpha { background: #AD2328; }
 .btn-fahasa { background: #C92127; }
+.btn-tiktok { background: #000000; }
 
 /* Quote Section */
 .quote-section { padding: 4rem 0; background: linear-gradient(rgba(5, 78, 126, 0.85), rgba(5, 78, 126, 0.85)), url('https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?auto=format&fit=crop&w=1920&q=80'); background-size: cover; background-position: center top; background-attachment: fixed; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15); position: relative; z-index: 1; margin-top: -1px; }
