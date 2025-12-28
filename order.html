@@ -110,9 +110,117 @@
                     <h2>Đặt Sách</h2>
                     <div class="section-title-line"></div>
                 </div>
+
+                <!-- Phần Đặt sách trực tiếp -->
+                <div class="order-direct-section">
+                    <div class="order-header">
+                        <h3>Đặt Sách Trực Tiếp Ngay</h3>
+                        <p>Nhận ngay nhiều ưu đãi độc quyền khi đặt qua website</p>
+                    </div>
+                    
+                    <!-- Benefits -->
+                    <div class="benefits-wrapper">
+                        <div class="benefits-section">
+                            <div class="benefits-title">
+                                <span class="gift-icon">🎁</span>
+                                Ưu đãi độc quyền khi đặt sách trực tiếp qua website:
+                            </div>
+                            <ul class="benefits-list">
+                                <li>
+                                    <span class="benefit-icon">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+                                    </span>
+                                    <span class="benefit-text">Giảm giá trực tiếp <span class="benefit-highlight">20.000 VNĐ</span></span>
+                                </li>
+                                <li>
+                                    <span class="benefit-icon">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+                                    </span>
+                                    <span class="benefit-text">Hỗ trợ <span class="benefit-highlight">Miễn phí vận chuyển</span> (Freeship)</span>
+                                </li>
+                                <li>
+                                    <span class="benefit-icon">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+                                    </span>
+                                    <span class="benefit-text">Được <span class="benefit-highlight">ký tặng</span> bởi tác giả</span>
+                                </li>
+                                <li>
+                                    <span class="benefit-icon">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+                                    </span>
+                                    <span class="benefit-text">Được gửi <span class="benefit-highlight">file tổng hợp toàn bộ prompts</span> trong sách để dễ dàng sao chép và sử dụng</span>
+                                </li>
+                                <li>
+                                    <span class="benefit-icon">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+                                    </span>
+                                    <span class="benefit-text">Được tặng <span class="benefit-highlight">bộ template Notion</span> về quản lý dự án học tập</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="order-form-container">
+                        <form id="orderForm">
+                            <div class="form-group">
+                                <label for="fullName">Họ và tên</label>
+                                <input type="text" id="fullName" name="fullName" placeholder="Nguyễn Văn A" minlength="5" required>
+                                <span class="error-msg" id="fullName-error"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="phone">Số điện thoại</label>
+                                <input type="tel" id="phone" name="phone" placeholder="0912345678" pattern="^(0[3|5|7|8|9])[0-9]{8}$" required>
+                                <span class="error-msg" id="phone-error"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="email">Email</label>
+                                <input type="email" id="email" name="email" placeholder="email@example.com" required>
+                                <span class="error-msg" id="email-error"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="address">Địa chỉ giao hàng</label>
+                                <textarea id="address" name="address" rows="4" placeholder="Số nhà, tên đường, phường/xã, quận/huyện, tỉnh/thành phố..." minlength="10" required></textarea>
+                                <span class="error-msg" id="address-error"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Số lượng sách</label>
+                                <div class="quantity-control">
+                                    <button type="button" class="btn-qty" onclick="changeQty(-1)">-</button>
+                                    <input type="number" id="quantity" name="quantity" value="1" min="1" readonly>
+                                    <button type="button" class="btn-qty" onclick="changeQty(1)">+</button>
+                                </div>
+                            </div>
+
+                            <div class="price-summary">
+                                <div class="price-row">
+                                    <span class="total-label">Tổng thanh toán (COD):</span>
+                                    <div>
+                                        <span id="total-display" class="total-amount">149.000 VNĐ</span>
+                                        <span class="old-price" id="old-price-display">169.000 VNĐ</span>
+                                    </div>
+                                </div>
+                                <p style="font-size: 12px; color: #6b7280; margin-top: 10px; margin-bottom: 0;">* Thanh toán khi nhận hàng (COD). Miễn phí vận chuyển.</p>
+                            </div>
+
+                            <input type="hidden" id="totalPrice" name="totalPrice" value="149000">
+
+                            <button type="submit" class="btn-submit" id="submitBtn">
+                                <span class="spinner" id="spinner"></span>
+                                <span id="btnText">XÁC NHẬN ĐẶT HÀNG</span>
+                            </button>
+                        </form>
+                        <div id="form-message"></div>
+                    </div>
+                </div>
+
+                <!-- Phần Đặt sách qua sàn TMĐT -->
                 <div class="order-online">
                     <div class="order-online-card">
-                        <h3>Đặt sách trực tuyến ngay tại</h3>
+                        <h3>Đặt sách qua các sàn thương mại điện tử</h3>
                         <div class="order-buttons">
                             <a href="https://shopee.vn/product/431679329/55553316575" target="_blank" rel="noopener noreferrer" class="order-btn btn-shopee"><img style="max-height: 25px; width: auto;" src="img/Shopee logo white.png" alt="Mua trên Shopee"></a>
 							<a href="https://www.tiktok.com/view/product/1733627489847183313" target="_blank" rel="noopener noreferrer" class="order-btn btn-tiktok"><img style="max-height: 27px; width: auto;" src="img/tiktok white.png" alt="Mua trên Shopee"></a>
@@ -123,7 +231,7 @@
                         </div>
                     </div>
                 </div>
-				<p style="margin-top: -20px; padding-bottom: 20px; color: darkred; text-align: center;">Sách “Đi học thời AI” đã chính thức được mở đặt trước trên một số sàn TMĐT. Hãy là người đầu tiên được trải nghiệm kiến thức đột phá này ngay hôm nay!</p>
+				<p style="margin-top: -20px; padding-bottom: 20px; color: darkred; text-align: center;">Sách "Đi học thời AI" đã chính thức được mở đặt trước trên một số sàn TMĐT. Hãy là người đầu tiên được trải nghiệm kiến thức đột phá này ngay hôm nay!</p>
 				<div class="order-cta">
                     <a href="preview.html" class="btn-primary">Đọc thử trước tại đây</a>
                 </div>

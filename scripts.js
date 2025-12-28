@@ -311,4 +311,197 @@ document.addEventListener('DOMContentLoaded', function() {
     initTOC();
     initOrderPage();
     initTestimonialsPage();
+    initOrderForm();
 });
+
+// Order Form (Direct Order)
+function initOrderForm() {
+    const form = document.getElementById('orderForm');
+    if (!form) return;
+
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbxQ19NltMlNR8a4wTfZf4eSCgP_bR0xxvhJmgxVMgmV3ok-farcyp8z2xS3Fbab52DjpQ/exec';
+    const unitPrice = 149000;
+    const oldUnitPrice = 169000;
+    const btnSubmit = document.getElementById('submitBtn');
+    const spinner = document.getElementById('spinner');
+    const btnText = document.getElementById('btnText');
+    const message = document.getElementById('form-message');
+
+    // Format price
+    function formatPrice(price) {
+        return price.toLocaleString('vi-VN') + ' VNĐ';
+    }
+
+    // Change quantity
+    window.changeQty = function(amt) {
+        const qtyInput = document.getElementById('quantity');
+        let currentQty = parseInt(qtyInput.value);
+        currentQty += amt;
+        if (currentQty < 1) currentQty = 1;
+        qtyInput.value = currentQty;
+        
+        const total = currentQty * unitPrice;
+        const oldTotal = currentQty * oldUnitPrice;
+        document.getElementById('total-display').innerText = formatPrice(total);
+        document.getElementById('old-price-display').innerText = formatPrice(oldTotal);
+        document.getElementById('totalPrice').value = total;
+    };
+
+    // Validation functions
+    function validateName(name) {
+        return name.trim().length >= 5;
+    }
+
+    function validatePhone(phone) {
+        const phoneRegex = /^(0[3|5|7|8|9])[0-9]{8}$/;
+        return phoneRegex.test(phone.trim());
+    }
+
+    function validateEmail(email) {
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return emailRegex.test(email.trim());
+    }
+
+    function validateAddress(address) {
+        return address.trim().length >= 10;
+    }
+
+    function showError(inputId, errorMsg) {
+        const input = document.getElementById(inputId);
+        const errorSpan = document.getElementById(inputId + '-error');
+        if (input && errorSpan) {
+            input.classList.add('invalid');
+            errorSpan.innerText = errorMsg;
+            errorSpan.style.display = 'block';
+        }
+    }
+
+    function clearError(inputId) {
+        const input = document.getElementById(inputId);
+        const errorSpan = document.getElementById(inputId + '-error');
+        if (input && errorSpan) {
+            input.classList.remove('invalid');
+            errorSpan.style.display = 'none';
+        }
+    }
+
+    function validateForm() {
+        let isValid = true;
+        
+        const fullName = document.getElementById('fullName').value;
+        const phone = document.getElementById('phone').value;
+        const email = document.getElementById('email').value;
+        const address = document.getElementById('address').value;
+
+        if (!validateName(fullName)) {
+            showError('fullName', 'Họ tên phải có ít nhất 5 ký tự');
+            isValid = false;
+        } else {
+            clearError('fullName');
+        }
+
+        if (!validatePhone(phone)) {
+            showError('phone', 'Số điện thoại không hợp lệ (VD: 0912345678)');
+            isValid = false;
+        } else {
+            clearError('phone');
+        }
+
+        if (!validateEmail(email)) {
+            showError('email', 'Email không hợp lệ');
+            isValid = false;
+        } else {
+            clearError('email');
+        }
+
+        if (!validateAddress(address)) {
+            showError('address', 'Địa chỉ phải có ít nhất 10 ký tự');
+            isValid = false;
+        } else {
+            clearError('address');
+        }
+
+        return isValid;
+    }
+
+    // Real-time validation on blur
+    const fullNameInput = document.getElementById('fullName');
+    const phoneInput = document.getElementById('phone');
+    const emailInput = document.getElementById('email');
+    const addressInput = document.getElementById('address');
+
+    if (fullNameInput) {
+        fullNameInput.addEventListener('blur', function() {
+            if (!validateName(this.value)) {
+                showError('fullName', 'Họ tên phải có ít nhất 5 ký tự');
+            } else {
+                clearError('fullName');
+            }
+        });
+    }
+
+    if (phoneInput) {
+        phoneInput.addEventListener('blur', function() {
+            if (!validatePhone(this.value)) {
+                showError('phone', 'Số điện thoại không hợp lệ (VD: 0912345678)');
+            } else {
+                clearError('phone');
+            }
+        });
+    }
+
+    if (emailInput) {
+        emailInput.addEventListener('blur', function() {
+            if (!validateEmail(this.value)) {
+                showError('email', 'Email không hợp lệ');
+            } else {
+                clearError('email');
+            }
+        });
+    }
+
+    if (addressInput) {
+        addressInput.addEventListener('blur', function() {
+            if (!validateAddress(this.value)) {
+                showError('address', 'Địa chỉ phải có ít nhất 10 ký tự');
+            } else {
+                clearError('address');
+            }
+        });
+    }
+
+    // Form submit
+    form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        if (!validateForm()) {
+            return;
+        }
+
+        btnSubmit.disabled = true;
+        spinner.style.display = 'inline-block';
+        btnText.innerText = 'Đang gửi thông tin...';
+        message.style.display = 'none';
+
+        fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+        .then(response => {
+            message.innerText = "Cảm ơn bạn! Đơn hàng đã được tiếp nhận. Bạn vui lòng kiểm tra Email xác nhận nhé!";
+            message.className = "success";
+            message.style.display = 'block';
+            form.reset();
+            document.getElementById('total-display').innerText = formatPrice(unitPrice);
+            document.getElementById('old-price-display').innerText = formatPrice(oldUnitPrice);
+            document.getElementById('totalPrice').value = unitPrice;
+        })
+        .catch(error => {
+            message.innerText = "Có lỗi xảy ra. Bạn vui lòng thử lại hoặc liên hệ hotline!";
+            message.className = "error";
+            message.style.display = 'block';
+        })
+        .finally(() => {
+            btnSubmit.disabled = false;
+            spinner.style.display = 'none';
+            btnText.innerText = 'XÁC NHẬN ĐẶT HÀNG';
+        });
+    });
+}
